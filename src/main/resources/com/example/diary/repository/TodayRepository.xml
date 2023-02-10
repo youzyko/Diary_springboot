@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.diary.repository.TodayRepository">
+
+    <select id="viewall" resultType="com.example.diary.entity.Today">
+        select * from todaydiary
+    </select>
+
+    <insert id="save">
+        INSERT INTO todaydiary
+            (id, author, content, emotion,created_date)
+        VALUES
+            (#{id}, #{author}, #{content}, #{emotion}, #{created_date})
+    </insert>
+
+</mapper>
+
+
+
