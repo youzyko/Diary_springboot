@@ -8,5 +8,10 @@ public interface TodayRepository {
 
   boolean save(Today today); //새글쓰기
 
+  boolean delete(int id); //삭제하기
+
+  int modify(Today today); //수정하기
+
+
 
 }

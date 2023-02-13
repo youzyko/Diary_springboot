@@ -53,4 +53,16 @@ public class TodayController {
         }
     }//delete_end
 
+    @PutMapping //수정
+  //아이디를 받아서 아이디에 해당하는 content를
+    public  ResponseEntity<?> update(@RequestBody Today today){
+       log.info("update_controller에 진입하셨습니다.");
+      try {
+          List<Today> todays = service.update(today);
+          return ResponseEntity.ok().body(todays);
+      }catch (Exception e){
+          return ResponseEntity.notFound().build();
+      }
+    } //update end
+
 }//TodayController_class_end

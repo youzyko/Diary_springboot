@@ -16,6 +16,18 @@
             (#{id}, #{author}, #{content}, #{emotion}, #{created_date})
     </insert>
 
+    <delete id="delete">
+        DELETE FROM todaydiary
+        WHERE id=#{id}
+    </delete>
+
+    <update id="modify" >
+        UPDATE todaydiary
+        SET content=#{content}
+        WHERE id=#{id}
+    </update>
+
+
 </mapper>
 
 

@@ -22,16 +22,26 @@ public class TodayService {
   public Today createServ(final Today today){ //새로운 일기 생성
       log.info("새로운 일기 생성 진입");
       if(today==null){
-          log.warn("일기에 내용이 없습니다 재확인요망");
+          log.warn("today는 null값이 될 수 없습니다.");
           throw new RuntimeException("일기에 내용이 없습니다");
       }
-      boolean flag=repository.save(today);  // 왜 boolean으로 처리..? 쓰지도 않음
+      boolean flag=repository.save(today);
       return today;
+  }//createServ end
 
-  }
+    public List<Today> deleteServ(int id){ //삭제
+      log.info("일기 삭제service 진입 성공");
+      boolean delete=repository.delete(id);
+      return  repository.viewall();
+    }
 
-  public List<Today> deleteServ(int id) {
-    log.info("삭제 서비스에 진입했습니다,");
-    boolean
-  }
+    public List<Today> update(Today today){ //수정
+        log.info("일기 수정service 진입 성공");
+       int numDelete =repository.modify(today);
+       log.info(String.valueOf(numDelete)); //몇개가 수정 됐는지 보기위함
+        return viewall();
+
+    }
+
+
 }//class end
