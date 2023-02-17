@@ -11,9 +11,9 @@
 
     <insert id="save">
         INSERT INTO todaydiary
-            (id, author, content, emotion,created_date)
+            (id, author, content, emotion)
         VALUES
-            (#{id}, #{author}, #{content}, #{emotion}, #{created_date})
+            (#{id}, #{author}, #{content}, #{emotion})
     </insert>
 
     <delete id="delete">
@@ -23,9 +23,10 @@
 
     <update id="modify" >
         UPDATE todaydiary
-        SET content=#{content}
+        SET content=#{content},emotion=#{emotion}
         WHERE id=#{id}
     </update>
+
 
 
 </mapper>

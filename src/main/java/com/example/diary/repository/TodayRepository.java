@@ -6,7 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface TodayRepository {
   List<Today> viewall(); //전체보기
 
-  boolean save(Today today); //새글쓰기
+
+    boolean save(Today today);
 
   boolean delete(int id); //삭제하기
 
