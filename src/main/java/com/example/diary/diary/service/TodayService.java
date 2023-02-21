@@ -1,7 +1,7 @@
-package com.example.diary.service;
+package com.example.diary.diary.service;
 
-import com.example.diary.entity.Today;
-import com.example.diary.repository.TodayRepository;
+import com.example.diary.diary.entity.Today;
+import com.example.diary.diary.repository.TodayRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

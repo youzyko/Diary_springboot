@@ -1,5 +1,6 @@
-package com.example.diary.repository;
-import com.example.diary.entity.Today;
+package com.example.diary.diary.repository;
+import com.example.diary.diary.entity.Today;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 @Mapper

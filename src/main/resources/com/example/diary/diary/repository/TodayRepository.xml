@@ -3,10 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.diary.repository.TodayRepository">
+<mapper namespace="com.example.diary.diary.repository.TodayRepository">
 
-    <select id="viewall" resultType="com.example.diary.entity.Today">
-        select * from todaydiary
+    <select id="viewall" resultType="com.example.diary.diary.entity.Today">
+        SELECT
+            id,author,content,emotion,date_format(created_date,'%Y-%m-%d %H:%i:%s') created_date
+        FROM
+            todaydiary
+
     </select>
 
     <insert id="save">

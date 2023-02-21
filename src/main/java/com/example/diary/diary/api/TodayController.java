@@ -1,7 +1,7 @@
-package com.example.diary.api;
+package com.example.diary.diary.api;
 
-import com.example.diary.entity.Today;
-import com.example.diary.service.TodayService;
+import com.example.diary.diary.entity.Today;
+import com.example.diary.diary.service.TodayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
