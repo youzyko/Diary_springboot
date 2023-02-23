@@ -8,12 +8,14 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserResponseDto {
     private  String id;
     private  String pwd;
 
+    private String token;
+
     //User_entity에서 id,pwd 빼오기
-    public UserDto(User user){
+    public UserResponseDto(User user){
         this.id=user.getId();
         this.pwd=user.getPwd();
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.diary.user.repository.UserRepository">
+    <select id="findUserById" resultType="com.example.diary.user.entity.User">
+        SELECT id, email, username, pwd
+        FROM user
+        WHERE id=#{id}
+    </select>
+</mapper>
