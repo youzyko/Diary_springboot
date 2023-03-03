@@ -6,4 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserRepository {
     User findUserById(String id);
-}
+
+    // 회원 가입하기
+    boolean register(User user);
+
+    //이ㅔ일 중복확인
+    boolean existsByEmail(String email);
+}//class_end

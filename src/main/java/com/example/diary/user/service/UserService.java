@@ -1,10 +1,10 @@
 package com.example.diary.user.service;
 
+import com.example.diary.user.dto.UserRequestDto;
 import com.example.diary.user.entity.User;
 import com.example.diary.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +33,27 @@ public class UserService {
     }
    public User getByCredential (String id){
         return  userRepository.findUserById(id);
+   }
+
+   //회원 가입 기능
+   public User createServ(final User user) throws RuntimeException {
+       if (user == null || user.getId() == null) {
+           throw new RuntimeException("Invalid args!");
+       }
+       // 패스워드 인코딩
+       String rawPw = user.getPwd();
+       user.setPwd(encoder.encode(rawPw));
+
+       boolean flag =userRepository.register(user);
+
+       return flag
+               ? getByCredential(user.getId())
+               : null;
+   }
+
+   //이메일 중복확인
+   public boolean isDuplicate(String email) {
+       return userRepository.existsByEmail(email);
    }
 
 }//class end

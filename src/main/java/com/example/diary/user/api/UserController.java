@@ -24,19 +24,24 @@ public class UserController {
     private final UserService userService;
     private final TokenProvider provider;
 
-    @PostMapping("/signup") //회원가입기능
-    public ResponseEntity<?> register(@RequestPart ("userInfo") UserRequestDto reqDto)throws IOException {
-        try{
-            User user=new User(reqDto)
-
-        }catch (){
+    //회원 가입
+    @PostMapping("/signup")
+    public ResponseEntity<?> register(@RequestBody User user) {
+        log.info("/auth/signup POST!! - login info : {}", user);
+        try {
+            User user1=userService.createServ(user);
+            return  ResponseEntity.ok().body(new UserResponseDto(user));
 
         }
-    }//signup_end
+        catch (RuntimeException e){
+            return ResponseEntity.badRequest().body(e.getMessage());
 
+        }
+    }
 
+    //로그인
     @PostMapping("/signin")
-    public ResponseEntity<?> signin(@RequestBody UserRequestDto dto) { //로그인
+    public ResponseEntity<?> signin(@RequestBody UserRequestDto dto) {
         log.info("/auth/signin POST!! - login info : {}", dto);
 
         try {
@@ -56,9 +61,16 @@ public class UserController {
         }
     } //signin_end
 
+    //이메일 중복확인
+    @GetMapping("/check")
+    public ResponseEntity<?> checkEmail(String email) {
+        boolean flag = userService.isDuplicate(email);
+        log.info("{} 중복여부?? - {}", email, flag);
+        return ResponseEntity.ok().body(flag);
+    }
 
 
 
 
 
-}
+}//class_end

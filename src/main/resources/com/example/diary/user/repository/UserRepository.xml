@@ -8,4 +8,19 @@
         FROM user
         WHERE id=#{id}
     </select>
+
+    <insert id="register">
+        INSERT INTO user
+            (id, email, pwd, username)
+        VALUES
+            (#{id}, #{email}, #{pwd}, #{username})
+    </insert>
+
+    <select id="existsByEmail" resultType="boolean">
+        SELECT COUNT(*)
+        FROM user
+        WHERE email=#{email}
+    </select>
+
+
 </mapper>

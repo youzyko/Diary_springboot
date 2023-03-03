@@ -5,19 +5,20 @@
 
 <mapper namespace="com.example.diary.diary.repository.TodayRepository">
 
-    <select id="viewall" resultType="com.example.diary.diary.entity.Today">
+    <select id="findAll" resultType="com.example.diary.diary.entity.Today">
         SELECT
-            id,author,content,emotion,date_format(created_date,'%Y-%m-%d %H:%i:%s') created_date
+            id,userId,author,content,emotion, created_date
         FROM
             todaydiary
-
+        WHERE userId=#{userId}
+        ORDER BY created_date
     </select>
 
     <insert id="save">
         INSERT INTO todaydiary
-            (id, author, content, emotion)
+            (id, author, content, emotion,userId)
         VALUES
-            (#{id}, #{author}, #{content}, #{emotion})
+            (#{id}, #{author}, #{content}, #{emotion},#{userId})
     </insert>
 
     <delete id="delete">
