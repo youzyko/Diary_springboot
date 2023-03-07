@@ -1,6 +1,5 @@
 package com.example.diary.user.service;
 
-import com.example.diary.user.dto.UserRequestDto;
 import com.example.diary.user.entity.User;
 import com.example.diary.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,18 +35,19 @@ public class UserService {
    }
 
    //회원 가입 기능
-   public User createServ(final User user) throws RuntimeException {
-       if (user == null || user.getId() == null) {
+   public User createServ(final User userEntity) throws RuntimeException {
+       if (userEntity == null || userEntity.getId() == null) {
            throw new RuntimeException("Invalid args!");
        }
-       // 패스워드 인코딩
-       String rawPw = user.getPwd();
-       user.setPwd(encoder.encode(rawPw));
 
-       boolean flag =userRepository.register(user);
+       // 패스워드 인코딩
+       String rawPw = userEntity.getPwd();
+       userEntity.setPwd(encoder.encode(rawPw));
+
+       boolean flag = userRepository.register(userEntity);
 
        return flag
-               ? getByCredential(user.getId())
+               ? getByCredential(userEntity.getEmail())
                : null;
    }
 

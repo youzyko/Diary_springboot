@@ -3,12 +3,15 @@ package com.example.diary.diary.api;
 import com.example.diary.diary.dto.FindAllDTO;
 import com.example.diary.diary.entity.Today;
 import com.example.diary.diary.service.TodayService;
+import com.sun.istack.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,16 +30,23 @@ public class TodayController {
 
 
 
-  @PostMapping//글등록
-    public ResponseEntity<?> create ( @AuthenticationPrincipal String userId,@RequestBody Today today){
+    @PostMapping//글등록
+    public ResponseEntity<?> create ( @AuthenticationPrincipal String userId,@Valid @NotNull @RequestBody Today today){
         log.info("글등록_controller_post");
+
+     /*   if (today.getAuthor() == null) {
+            return ResponseEntity.badRequest().body("Today object cannot be null");
+        }
+*/
         today.setUserId(userId);
 
         try {
             FindAllDTO dto = service.createServ(today);
-            if(dto==null){
+            if(dto==null ){
+
                 return  ResponseEntity.notFound().build();
             }else{
+
                 return  ResponseEntity.ok().body(dto);
             }
         }catch (RuntimeException e){
@@ -46,7 +56,7 @@ public class TodayController {
 
     }
 
-  @DeleteMapping("/{id}")  //삭제
+    @DeleteMapping("/{id}")  //삭제
     public ResponseEntity<?> delete(@PathVariable int id,@AuthenticationPrincipal String userId){
         log.info("삭제 요청-controller");
         try {
@@ -57,17 +67,17 @@ public class TodayController {
         }
     }//delete_end
 
- @PutMapping //수정
-  //아이디를 받아서 아이디에 해당하는 content를
+    @PutMapping //수정
+    //아이디를 받아서 아이디에 해당하는 content를
     public  ResponseEntity<?> update(@RequestBody Today today, @AuthenticationPrincipal String userId){
-       log.info("update_controller에 진입하셨습니다.");
-       today.setUserId(userId);
-      try {
-          FindAllDTO dtos = service.update(today);
-          return ResponseEntity.ok().body(dtos);
-      }catch (Exception e){
-          return ResponseEntity.notFound().build();
-      }
+        log.info("update_controller에 진입하셨습니다.");
+        today.setUserId(userId);
+        try {
+            FindAllDTO dtos = service.update(today);
+            return ResponseEntity.ok().body(dtos);
+        }catch (Exception e){
+            return ResponseEntity.notFound().build();
+        }
     } //update end
 
 

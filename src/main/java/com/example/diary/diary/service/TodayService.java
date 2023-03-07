@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class TodayService {
-   private final TodayRepository repository;
+    private final TodayRepository repository;
 
 /*  public List<Today> viewall(){ //전체항목
       log.info("전체항목 진입성공");
@@ -19,9 +19,9 @@ public class TodayService {
       return  viewall;
   }*/
 
-   public FindAllDTO createServ(Today today){
+    public FindAllDTO createServ(Today today){
         log.info("글등록_service");
-        if(today==null){
+        if(today.getAuthor()==""||today.getContent()==""){
             log.warn("Today는 null 일 수 없습니다");
             throw new RuntimeException("newTodo cannot be null!");
         }
@@ -38,20 +38,20 @@ public class TodayService {
 
 
     public FindAllDTO deleteServ(int id, String userId){ //삭제
-      log.info("일기 삭제service 진입 성공");
-      boolean delete=repository.delete(id);
+        log.info("일기 삭제service 진입 성공");
+        boolean delete=repository.delete(id);
         if (!delete) {
             log.warn("delete fail!! not found id [{}]", id);
             throw new RuntimeException("delete fail!");
         }
-      return findAllServ(userId);
+        return findAllServ(userId);
     }
 
 
     public FindAllDTO update(Today today){ //수정
         log.info("일기 수정service 진입 성공");
         int numDelete = repository.modify(today);
-       //log.info(String.valueOf(numDelete)); //몇개가 수정 됐는지 보기위함
+        //log.info(String.valueOf(numDelete)); //몇개가 수정 됐는지 보기위함
 
         return findAllServ(today.getUserId());
     }

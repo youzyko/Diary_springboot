@@ -11,9 +11,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @Slf4j
@@ -25,8 +28,9 @@ public class UserController {
     private final TokenProvider provider;
 
     //회원 가입
-    @PostMapping("/signup")
-    public ResponseEntity<?> register(@RequestBody User user) {
+
+   @PostMapping("/signup")
+    public ResponseEntity<?> register(@RequestPart("userInfo") User user) {
         log.info("/auth/signup POST!! - login info : {}", user);
         try {
             User user1=userService.createServ(user);
@@ -38,6 +42,27 @@ public class UserController {
 
         }
     }
+/*
+    @PostMapping("/signup")
+    public ResponseEntity<?> register(
+            @RequestPart("userInfo") UserRequestDto reqDto
+
+    ) throws IOException {
+
+        try {
+            // userReqDto를 서비스에 전송
+            // userEntity로 변환
+            User entity = new User(reqDto);
+            log.info("/auth/signup POST!! - userInfo : {}", entity);
+            User user = userService.createServ(entity);
+
+
+            return ResponseEntity.ok().body(new UserResponseDto(user));
+
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }*/
 
     //로그인
     @PostMapping("/signin")

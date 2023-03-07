@@ -15,10 +15,9 @@ public class User {
     private String pwd; //비밀번호
 
     public User(UserRequestDto dto) {
-        this.email = dto.getId();
+
+        this.id = dto.getId();
         this.username = dto.getUsername();
         this.pwd = dto.getPwd();
     }
-
-
 }

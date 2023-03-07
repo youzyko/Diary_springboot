@@ -12,7 +12,7 @@ public class UserResponseDto {
     private  String id;
     private  String pwd;
 
-    private String token;
+    private String token; //인증토큰
 
     //User_entity에서 id,pwd 빼오기
     public UserResponseDto(User user){

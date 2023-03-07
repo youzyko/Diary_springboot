@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequestDto {
-
+/*    private String email;*/
     private String id;
     private String pwd;
     private String username;
