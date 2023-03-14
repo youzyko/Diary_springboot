@@ -12,4 +12,8 @@ public interface UserRepository {
 
     //이ㅔ일 중복확인
     boolean existsByEmail(String email);
+
+    //프로필 사진 찾기
+     String findProfile(String userId);
+
 }//class_end

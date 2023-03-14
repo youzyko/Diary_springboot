@@ -47,13 +47,21 @@ public class UserService {
        boolean flag = userRepository.register(userEntity);
 
        return flag
-               ? getByCredential(userEntity.getEmail())
+               ? getByCredential(userEntity.getId())
                : null;
    }
+
 
    //이메일 중복확인
    public boolean isDuplicate(String email) {
        return userRepository.existsByEmail(email);
    }
+
+   //프로필 사진 찾기
+    public String getProfilePath(String userId){
+        String profile = userRepository.findProfile(userId);
+        log.info("find profile path - {}", profile);
+        return profile;
+    }
 
 }//class end

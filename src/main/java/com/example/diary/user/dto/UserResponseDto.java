@@ -11,11 +11,12 @@ import lombok.*;
 public class UserResponseDto {
     private  String id;
     private  String pwd;
-
+   private String profileImg;
     private String token; //인증토큰
 
     //User_entity에서 id,pwd 빼오기
     public UserResponseDto(User user){
+       this.profileImg=getProfileImg();
         this.id=user.getId();
         this.pwd=user.getPwd();
     }

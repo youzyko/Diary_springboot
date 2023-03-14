@@ -11,5 +11,5 @@ public class UserRequestDto {
 /*    private String email;*/
     private String id;
     private String pwd;
-    private String username;
+/*    private String username;*/
 }
